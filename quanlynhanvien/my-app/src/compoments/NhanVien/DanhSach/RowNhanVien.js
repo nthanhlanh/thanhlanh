@@ -4,7 +4,8 @@ import {
   capNhatNhanVien,
   capNhatLabel,
   themMoiLabel,
-  xoaNhanVien
+  xoaNhanVien,
+  initSeach
 } from "../../../actions/index";
 
 class RowNhanVien extends React.Component {
@@ -15,10 +16,17 @@ class RowNhanVien extends React.Component {
   };
 
   thuchienxoa() {
-    var { nv, xoanhanvien, themmoilabel, capnhatnhanvien } = this.props;
+    var {
+      nv,
+      xoanhanvien,
+      themmoilabel,
+      capnhatnhanvien,
+      initsearch
+    } = this.props;
     xoanhanvien(nv.id);
     themmoilabel();
     capnhatnhanvien({ id: "", ten: "", email: "", kichhoat: 0 });
+    initsearch({ ten: "", email: "", kichhoat: -1 });
   }
 
   render() {
@@ -49,7 +57,9 @@ const mapDispatchToProps = dispatch => ({
   capnhatnhanvien: nhanvien => dispatch(capNhatNhanVien(nhanvien)),
   capnhatlabel: () => dispatch(capNhatLabel()),
   themmoilabel: () => dispatch(themMoiLabel()),
-  xoanhanvien: id => dispatch(xoaNhanVien(id))
+  xoanhanvien: id => dispatch(xoaNhanVien(id)),
+  initsearch: (ten, email, kichhoat) =>
+    dispatch(initSeach(ten, email, kichhoat))
 });
 
 export default connect(

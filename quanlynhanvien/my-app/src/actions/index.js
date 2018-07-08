@@ -44,6 +44,13 @@ export const capNhatLabel = () => ({
   type: "CAPNHAT_LABEL"
 });
 
+export const initSeach = (ten, email, kichhoat) => ({
+  type: "INIT_SEARCH",
+  ten: ten,
+  email: email,
+  kichhoat: kichhoat
+});
+
 export const VisibilityFilters = {
   SHOW_ALL: "SHOW_ALL",
   SHOW_COMPLETED: "SHOW_COMPLETED",

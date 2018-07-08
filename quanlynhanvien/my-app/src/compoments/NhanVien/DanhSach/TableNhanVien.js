@@ -5,20 +5,34 @@ let ten;
 let kichhoat;
 let email;
 class TableNhanVien extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state={
-        ten="",
-        kichhoat="-1",
-        email=""
+  //   constructor(props) {
+  //     super(props);
+  //     var { initsearch } = props;
+  //     this.state = {
+  //       ten: initsearch.ten,
+  //       email: initsearch.email,
+  //       kichhoat: initsearch.kichhoat
+  //     };
+  //   }
+  componentWillReceiveProps(nextProps) {
+    console.log("nextProps.kichhoat " + nextProps.initsearch.kichhoat);
+    if (nextProps.initsearch.ten === "") {
+      ten.value = nextProps.initsearch.ten;
+      email.value = nextProps.initsearch.email;
+      kichhoat.value = nextProps.initsearch.kichhoat;
     }
   }
+  timkiemtennhanvien = () => {
+    var { timkiemtennhanvien, initsearch } = this.props;
+    timkiemtennhanvien(ten.value);
+    initsearch(ten.value, email.value, kichhoat.value);
+  };
   render() {
     var {
       nhanviens,
-      timkiemtennhanvien,
       timkiemkichhoatnhanvien,
-      timkiememailnhanvien
+      timkiememailnhanvien,
+      initsearch
     } = this.props;
     var elenhanvien = nhanviens.map((item, index) => {
       return <RowNhanVien key={index} nv={item} index={index} />;
@@ -43,7 +57,8 @@ class TableNhanVien extends React.Component {
                   name="searchName"
                   placeholder="Tìm kiếm Tên"
                   ref={node => (ten = node)}
-                  onChange={() => timkiemtennhanvien(ten.value)}
+                  onChange={() => this.timkiemtennhanvien(ten.value)}
+                  value={initsearch.ten}
                 />
               </th>
               <th>

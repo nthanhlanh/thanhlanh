@@ -4,7 +4,8 @@ import {
   VisibilityFilters,
   timKiemTenNhanVien,
   timKiemKichHoatNhanVien,
-  timKiemEmailNhanVien
+  timKiemEmailNhanVien,
+  initSeach
 } from "../actions";
 
 const getVisibleTodos = (nhanviens, filter) => {
@@ -22,14 +23,17 @@ const getVisibleTodos = (nhanviens, filter) => {
 };
 
 const mapStateToProps = state => ({
-  nhanviens: getVisibleTodos(state.nhanviens, VisibilityFilters.SHOW_ALL)
+  nhanviens: getVisibleTodos(state.nhanviens, VisibilityFilters.SHOW_ALL),
+  initsearch: state.initsearch
 });
 
 const mapDispatchToProps = dispatch => ({
   timkiemtennhanvien: ten => dispatch(timKiemTenNhanVien(ten)),
   timkiemkichhoatnhanvien: kichhoat =>
     dispatch(timKiemKichHoatNhanVien(kichhoat)),
-  timkiememailnhanvien: email => dispatch(timKiemEmailNhanVien(email))
+  timkiememailnhanvien: email => dispatch(timKiemEmailNhanVien(email)),
+  initsearch: (ten, email, kichhoat) =>
+    dispatch(initSeach(ten, email, kichhoat))
 });
 
 export default connect(
